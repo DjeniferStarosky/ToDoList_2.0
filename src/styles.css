@@ -1,1 +1,105 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+    margin: 0; 
+    padding: 0; 
+    height: 100%; 
+  }
+  
+  .container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  /* BARRA LATERAL*/
+  
+  .sidebar {
+    width: 300px;
+    display: flex;
+    flex-direction: column; 
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    margin-bottom: 10px;
+  }
+  
+  app-tema {
+    margin-top: auto;
+  }
+  
+  
+  /* PERFIL USUARIO */
+  .user-profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; 
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .logout-button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    background-color: #c62828;
+  }
+  
+  
+  /* CONTEUDO */
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+  
+  /* TEMAS */
+  
+  /* Tema Dark */
+    body.dark-theme .content {
+      background-color: black;
+      color: white;
+    }
+    
+    /* Tema Light */
+    body.light-theme .content {
+      background-color: #D7D7D7;
+      color: black;
+    }
+    
+    /* Tema Color */
+    body.color-theme .content {
+      background-color: #AD590B;
+      color: black;
+    }
+    

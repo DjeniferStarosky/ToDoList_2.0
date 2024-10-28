@@ -1,0 +1,26 @@
+
+<div class="container">
+    <aside class="sidebar">
+      <div class="user-profile">
+        <img [src]="getAvatar()" alt="Avatar do Usuário" class="avatar">
+        <div class="user-info">
+          <p class="user-name">Nome do Usuário</p>
+          <button class="logout-button" (click)="logout()">Sair</button>
+        </div>
+      </div>
+      
+      <ul>
+        <li><a routerLink="/minha-lista">Minha Lista</a></li>
+        <li><a routerLink="/meu-dia">Meu Dia</a></li>
+        <li><a routerLink="/importante">Importante</a></li>
+        <li><a routerLink="/atrasadas">Atrasadas</a></li>
+      </ul>
+  
+      <app-tema></app-tema>
+    </aside>
+    
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  
