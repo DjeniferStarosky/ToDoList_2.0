@@ -1,0 +1,47 @@
+.theme-selector {
+    position: relative;
+  }
+  
+  .theme-icon {
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+  }
+  
+  .theme-icon:hover {
+    color: #333;
+  }
+  
+  .theme-options {
+    position: absolute;
+    bottom: 100%;
+    left: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+  }
+  
+  .theme-options li {
+    padding: 8px 12px;
+  }
+  
+  .theme-options button {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .theme-options button:hover {
+    background-color: #f0f0f0;
+  }
+  

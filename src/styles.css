@@ -6,8 +6,8 @@ html, body {
   
   .container {
     display: flex;
-    height: 100vh;
-    overflow: hidden;
+    flex-direction: row; 
+    min-height: 100vh; 
   }
   
   /* BARRA LATERAL*/
@@ -17,7 +17,8 @@ html, body {
     display: flex;
     flex-direction: column; 
     padding: 10px;
-    background-color: white;
+    background-color: #F3F3F3;
+    list-style: none;
   }
   
   .sidebar ul {
@@ -29,7 +30,31 @@ html, body {
   .sidebar li {
     margin-bottom: 10px;
   }
+
+  .sidebar .menu{
+    width: 100%;
+    padding: 10px;
+    background-color: #D9D9D9;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
   
+  .sidebar .menu:hover {
+    background-color: #828282; 
+  }
+
+  .menu.active {
+    background-color: #c0c0c0; 
+    font-weight: bold;
+    color: #333;
+  }
+
+
   app-tema {
     margin-top: auto;
   }
@@ -60,45 +85,36 @@ html, body {
   }
   
   .logout-button {
-    margin-top: 5px;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background-color: #FBF5E7;
+    height: 25px;
+    width: 25px;
+    text-align: left;
+    color: #333;
     cursor: pointer;
-  }
-  
-  .logout-button:hover {
-    background-color: #c62828;
+    border: none;
   }
   
   
   /* CONTEUDO */
   
-  .content {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-  }
-  
+
   
   /* TEMAS */
   
   /* Tema Dark */
-    body.dark-theme .content {
+    body.dark .content {
       background-color: black;
       color: white;
     }
-    
+
     /* Tema Light */
-    body.light-theme .content {
-      background-color: #D7D7D7;
+    body.light .content {
+      background-color: #d6d6d6;
       color: black;
     }
     
     /* Tema Color */
-    body.color-theme .content {
+    body.color .content {
       background-color: #AD590B;
       color: black;
     }

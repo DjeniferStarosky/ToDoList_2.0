@@ -1,19 +1,23 @@
-// tema.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TemaService {
-  private temaAtual: string = 'light'; 
+  private temaKey = 'selectedTema'; // Chave para armazenar no Local Storage
 
-  setTema(tema: string) {
-    this.temaAtual = tema;
-    document.body.className = ''; 
-    document.body.classList.add(`${tema}-theme`);
+  constructor() {}
+
+  // Método para obter o tema atual
+  getTema(): string {
+    const temaSalvo = localStorage.getItem(this.temaKey);
+    return temaSalvo ? temaSalvo : 'light'; 
   }
 
-  getTema(): string {
-    return this.temaAtual;
+  // Método para definir um novo tema
+  setTema(tema: string): void {
+    localStorage.setItem(this.temaKey, tema); // Salva o tema no Local Storage
+    document.body.classList.remove('light', 'dark', 'color');
+    document.body.classList.add(tema); // Aplica o tema no body
   }
 }

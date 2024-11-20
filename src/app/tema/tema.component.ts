@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TemaService } from '../tema.service'; 
+import { TemaService } from '../tema.service';
 
 @Component({
   selector: 'app-tema',
@@ -7,14 +7,21 @@ import { TemaService } from '../tema.service';
   styleUrls: ['./tema.component.css']
 })
 export class TemaComponent implements OnInit {
+  dropdownOpen = false;
+
   constructor(private temaService: TemaService) {}
 
   ngOnInit(): void {
-    this.temaService.setTema('light'); 
+    const temaAtual = this.temaService.getTema(); 
+    document.body.classList.add(temaAtual); // Aplica o tema recuperado
   }
 
-  selecionarTema(event: Event): void {
-    const temaSelecionado = (event.target as HTMLSelectElement).value;
-    this.temaService.setTema(temaSelecionado);
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  selecionarTema(tema: string): void {
+    this.temaService.setTema(tema); // Salva e aplica o novo tema
+    this.dropdownOpen = false; // Fecha o dropdown
   }
 }

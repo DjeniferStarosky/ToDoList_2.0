@@ -5,15 +5,23 @@
         <img [src]="getAvatar()" alt="Avatar do Usuário" class="avatar">
         <div class="user-info">
           <p class="user-name">Nome do Usuário</p>
-          <button class="logout-button" (click)="logout()">Sair</button>
+          <button class="logout-button" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
         </div>
       </div>
       
       <ul>
-        <li><a routerLink="/minha-lista">Minha Lista</a></li>
-        <li><a routerLink="/meu-dia">Meu Dia</a></li>
-        <li><a routerLink="/importante">Importante</a></li>
-        <li><a routerLink="/atrasadas">Atrasadas</a></li>
+        <li>
+          <button class="menu" (click)="navegarPara('/minha-lista')" [ngClass]="{'active': rotaAtiva('/minha-lista')}"><i class="fas fa-list"></i> Minha Lista</button>
+        </li>
+        <li>
+          <button class="menu" (click)="navegarPara('/meu-dia')" [ngClass]="{'active': rotaAtiva('/meu-dia')}"><i class="fas fa-calendar-day"></i>  Meu Dia</button>
+        </li>
+        <li>
+          <button class="menu" (click)="navegarPara('/importante')" [ngClass]="{'active': rotaAtiva('/importante')}"><i class="fas fa-star"></i> Importante</button>
+        </li>
+        <li>
+          <button class="menu" (click)="navegarPara('/atrasadas')" [ngClass]="{'active': rotaAtiva('/atrasadas')}"><i class="fa-solid fa-circle-exclamation"></i>  Atrasadas</button>
+        </li>
       </ul>
   
       <app-tema></app-tema>
@@ -21,6 +29,23 @@
     
     <main class="content">
       <router-outlet></router-outlet>
+   
+      <form (submit)="onSubmit($event)" class="form-tarefa">
+        <div class="form-group">
+          <input type="text" id="descricao" name="descricao" [(ngModel)]="descricao" required placeholder="Descreva a tarefa" class="input-text">
+          <input type="datetime-local" id="dataHora" name="dataHora" [(ngModel)]="dataHora" required class="input-date">
+    
+          <button type="button" (click)="toggleImportante()" class="icon-button">
+            <i [class.fa-regular]="!importante" [class.fa-solid]="importante" class="fa-star"></i>
+          </button>
+    
+          <button type="submit" class="icon-button">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </form>
     </main>
+
+    
   </div>
   
