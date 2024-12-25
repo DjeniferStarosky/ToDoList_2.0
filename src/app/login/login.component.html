@@ -1,0 +1,37 @@
+<div class="login">
+    <div class="bemvindo"> 
+        <h1>Bem vindo à sua lista de Tarefas!</h1>
+        <p><strong>Faça login</strong> ou <strong>crie uma conta</strong> para começar.</p>
+    </div>
+
+    <div class="login-container">
+        <h2 *ngIf="!isRegistering">Login</h2>
+        <h2 *ngIf="isRegistering">Criar conta</h2>
+    
+        <div *ngIf="!isRegistering" >
+            <form (submit)="login()" class="form">
+                <input type="text" id="username" [(ngModel)]="loginData.username" name="username" placeholder="Digite seu usuário" required>
+                <input type="password" id="password" [(ngModel)]="loginData.password" name="password" placeholder="Digite sua senha" required>
+                <button type="submit">Entrar</button>
+                <div *ngIf="message" class="error-message">{{ message }}</div>
+                <div class="register">
+                    <p>Não tem uma conta? <a href="javascript:void(0)" (click)="toggleForm()">Cadastre-se</a></p>
+                </div>
+
+            </form>
+        </div>
+    
+        <div *ngIf="isRegistering">
+            <form (submit)="register()" class="form">
+                <input type="text" id="register-username" [(ngModel)]="registerData.username" name="username" placeholder="Digite um nome de usuário" required>
+                <input type="password" id="register-password" [(ngModel)]="registerData.password" name="password"  placeholder="Digite sua senha" required>
+                <input type="password" id="register-confirm-password" [(ngModel)]="registerData.confirmPassword" name="confirmPassword" placeholder="Repita sua senha" required>
+                <button type="submit">Cadastrar</button>
+                <div *ngIf="message" class="error-message">{{ message }}</div>
+                <div class="register"> 
+                    <p>Já tem uma conta? <a href="javascript:void(0)" (click)="toggleForm()">Faça login</a></p>
+                </div>
+            </form>
+        </div>
+      </div>
+</div>

@@ -10,6 +10,7 @@ import { MeuDiaComponent } from './meu-dia/meu-dia.component';
 import { ImportanteComponent } from './importante/importante.component';
 import { AtrasadasComponent } from './atrasadas/atrasadas.component';
 import { TemaComponent } from './tema/tema.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { TemaComponent } from './tema/tema.component';
     ImportanteComponent,
     AtrasadasComponent,
     TemaComponent,
+    LoginComponent,
 
   ],
   imports: [

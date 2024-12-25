@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TemaService } from '../tema.service'; 
+import { AuthService } from '../auth.service'; 
+
+
 
 @Component({
   selector: 'app-layout',
@@ -8,11 +11,15 @@ import { TemaService } from '../tema.service';
   styleUrls: ['./layout.component.css']
 })
 export class LayoutComponent {
-  descricao: string = '';  // Variável para o campo de descrição
-  dataHora: string = '';   // Variável para o campo de data/hora
-  importante: boolean = false;  // Variável para controlar se a tarefa é importante
+  descricao: string = '';
+  dataHora: string = ''; 
+  importante: boolean = false;
 
-  constructor(private temaService: TemaService, private router: Router) {}
+  constructor(
+    private temaService: TemaService, 
+    private router: Router, 
+    private authService: AuthService 
+  ) {}
 
   // Método para alternar a marcação de importante
   toggleImportante(): void {
@@ -25,7 +32,7 @@ export class LayoutComponent {
     console.log('Tarefa:', this.descricao);
     console.log('Data e Hora:', this.dataHora);
     console.log('Importante:', this.importante);
-    // Aqui você pode adicionar a lógica para salvar os dados, como enviar para um backend
+    // >>>>>adicionar a lógica para salvar os dados no banco<<<<
   }
 
   // Método para garantir que o tema esteja aplicado ao carregar a página
@@ -44,7 +51,7 @@ export class LayoutComponent {
     return this.router.url.startsWith(rota);
   }
 
-  // Método para obter o avatar conforme o tema
+ 
   getAvatar(): string {
     const temaAtual = this.temaService.getTema(); 
     switch (temaAtual) {
@@ -58,8 +65,9 @@ export class LayoutComponent {
     }
   }
 
-  // Método de logout
   logout(): void {
-    console.log('Usuário saiu');
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
+
 }
