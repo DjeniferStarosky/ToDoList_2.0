@@ -42,6 +42,9 @@ export class AuthService {
   logout(): void {
     this.isAuthenticated = false;
     localStorage.removeItem('token'); // Remover o token do localStorage
+    localStorage.removeItem('isLoggedIn'); // Remove a informação de login
+    localStorage.removeItem('selectedTema'); // Remove o tema selecionado
+    localStorage.removeItem('username'); // Remove o nome do usuário
     this.router.navigate(['/login']);  // Redireciona para a tela de login
   }
 
