@@ -29,6 +29,7 @@ if (!empty($data->username) && !empty($data->password)) {
                 // Retorna os dados do usuário (com id)
                 echo json_encode([
                     "message" => "Login bem-sucedido.",
+                    "token" => $token,
                     "user_id" => $user['id'],
                     "username" => $user['username']
                 ]);

@@ -22,7 +22,8 @@ export class LoginComponent {
       response => {
         if (response && response.message === 'Login bem-sucedido.') {
           // Se o login for bem-sucedido, armazene informações relevantes
-          this.authService.setAuthentication('fake-token'); // Substitua com um token real se necessário
+          this.authService.setAuthentication(response.token);  // Salva o token gerado
+          this.authService.setUser(response.username); // Salvar o nome do usuário
           this.router.navigate(['/minha-lista']);
         } else {
           this.message = response.message || 'Erro desconhecido. Tente novamente em instantes.';

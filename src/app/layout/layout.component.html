@@ -4,7 +4,7 @@
       <div class="user-profile">
         <img [src]="getAvatar()" alt="Avatar do Usuário" class="avatar">
         <div class="user-info">
-          <p class="user-name">Nome do Usuário</p>
+          <p class="user-name">{{ userName || 'Nome do usuário' }}</p>
           <button class="logout-button" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
         </div>
       </div>

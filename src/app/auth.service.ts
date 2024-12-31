@@ -10,6 +10,7 @@ export class AuthService {
 
   private apiUrl = 'http://localhost/TODOLIST/backend/apis/login.php'; 
   private isAuthenticated: boolean = false;
+  private username: string | null = null;
 
   constructor(private router: Router, private http: HttpClient) { }
 
@@ -56,7 +57,18 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-
+  // Método para obter o nome do usuario e armazenar
+  setUser(username: string): void {
+    this.username = username;
+    localStorage.setItem('username', username); 
+  }
+  
+  getUser(): string | null {
+    if (!this.username) {
+      this.username = localStorage.getItem('username'); // Recupera do localStorage, se necessário
+    }
+    return this.username;
+  }
 
 
 

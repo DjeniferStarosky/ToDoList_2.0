@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TemaService } from '../tema.service'; 
 import { AuthService } from '../auth.service'; 
@@ -14,6 +14,7 @@ export class LayoutComponent {
   descricao: string = '';
   dataHora: string = ''; 
   importante: boolean = false;
+  userName: string | null = null;
 
   constructor(
     private temaService: TemaService, 
@@ -35,10 +36,14 @@ export class LayoutComponent {
     // >>>>>adicionar a lógica para salvar os dados no banco<<<<
   }
 
-  // Método para garantir que o tema esteja aplicado ao carregar a página
+
   ngOnInit(): void {
+    // Garantir que o tema esteja aplicado
     const temaAtual = this.temaService.getTema();
     document.body.classList.add(temaAtual);
+
+    // Recuperar o nome do usuário logado
+    this.userName = this.authService.getUser();
   }
 
   // Método para navegar para outras rotas
