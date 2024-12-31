@@ -11,6 +11,7 @@ import { ImportanteComponent } from './importante/importante.component';
 import { AtrasadasComponent } from './atrasadas/atrasadas.component';
 import { TemaComponent } from './tema/tema.component';
 import { LoginComponent } from './login/login.component';
+import { HttpClientModule } from '@angular/common/http'; 
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { LoginComponent } from './login/login.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

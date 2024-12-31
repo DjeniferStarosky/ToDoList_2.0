@@ -1,33 +1,64 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private apiUrl = 'http://localhost/TODOLIST/backend/tasks/login.php'; 
   private isAuthenticated: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
-  // Método para realizar o login (simulado)
-  login(username: string, password: string): boolean {
-    // Simulação de login, substitua com lógica real de autenticação
-    if (username === 'DjeniStarosky' && password === '1234') {
-      this.isAuthenticated = true;
-      return true;
-    }
-    return false;
-  }
-
-  // Método para realizar o logout
-  logout(): void {
-    this.isAuthenticated = false;
-    this.router.navigate(['/login']);  // Redireciona para a tela de login
+  // Método para realizar o login
+  login(username: string, password: string): Observable<any> {
+    const body = { username, password };
+    
+    // Envia os dados para a API de login
+    return this.http.post<any>(this.apiUrl, body, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
   }
 
   // Método para verificar se o usuário está autenticado
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
+
+  // Método para registrar um novo usuário
+  register(username: string, password: string): Observable<any> {
+    const url = 'http://localhost/TODOLIST/backend/tasks/create_user.php'; 
+    const body = { username, password };
+
+    return this.http.post<any>(url, body, {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    });
+  }
+
+  // Método para realizar o logout
+  logout(): void {
+    this.isAuthenticated = false;
+    localStorage.removeItem('token'); // Remover o token do localStorage
+    this.router.navigate(['/login']);  // Redireciona para a tela de login
+  }
+
+  // Método para armazenar o token no localStorage e atualizar o estado de autenticação
+  setAuthentication(token: string): void {
+    this.isAuthenticated = true;
+    localStorage.setItem('token', token); // Armazena o token no localStorage
+  }
+
+
+  // Método para obter o token do localStorage
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+
+
+
+
 }
