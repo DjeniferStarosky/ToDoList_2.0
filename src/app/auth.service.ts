@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost/TODOLIST/backend/tasks/login.php'; 
+  private apiUrl = 'http://localhost/TODOLIST/backend/apis/login.php'; 
   private isAuthenticated: boolean = false;
 
   constructor(private router: Router, private http: HttpClient) { }
@@ -16,7 +16,6 @@ export class AuthService {
   // Método para realizar o login
   login(username: string, password: string): Observable<any> {
     const body = { username, password };
-    
     // Envia os dados para a API de login
     return this.http.post<any>(this.apiUrl, body, {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,7 +29,7 @@ export class AuthService {
 
   // Método para registrar um novo usuário
   register(username: string, password: string): Observable<any> {
-    const url = 'http://localhost/TODOLIST/backend/tasks/create_user.php'; 
+    const url = 'http://localhost/TODOLIST/backend/apis/create_user.php'; 
     const body = { username, password };
 
     return this.http.post<any>(url, body, {
