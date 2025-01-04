@@ -1,1 +1,17 @@
-<p>minha-lista works!</p>
+<div class="listagem">
+    <h2 class="tituloPag"><i class="fa fa-list"></i> Minhas Tarefas</h2>
+    <p *ngIf="tasks.length === 0" class="semTarefa">Você não possui tarefas cadastradas</p>
+
+    <div *ngFor="let task of tasks" class="item_lista">
+        <div class="concluir" (click)="concluirTarefa(task)"><i class="fas fa-check"></i></div>
+        <div class="informacao">
+            <p class="descricao">{{ task.description }}</p>
+            <p class="data">{{ formatDate(task.date_time) }}</p>
+        </div>
+        <div class="prioridade"> 
+            <i [class.fa-regular]="task.important === 0"
+                [class.fa-solid]="task.important === 1 "
+                class="fa-star"> </i>
+        </div>
+    </div>
+</div>

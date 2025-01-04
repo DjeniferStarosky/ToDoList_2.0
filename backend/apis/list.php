@@ -1,4 +1,5 @@
 <?php
+require_once('../config/headers.php');
 require_once('../db/connection.php');
 
 
@@ -28,7 +29,7 @@ switch ($listType) {
         $sql .= " AND DATE(date_time) = :currentDate";
         break;
     case 'importante':
-        $sql .= " AND importante = 1 AND DATE(date_time) >= :currentDate";
+        $sql .= " AND important = 1 AND DATE(date_time) >= :currentDate";
         break;
     case 'atrasadas':
         $sql .= " AND DATE(date_time) < :currentDate";

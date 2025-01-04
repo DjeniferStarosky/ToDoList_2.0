@@ -28,23 +28,29 @@
     </aside>
     
     <main class="content">
-      <router-outlet></router-outlet>
-   
-      <form (submit)="onSubmit($event)" class="form-tarefa">
-        <div class="form-group">
-          <input type="text" id="descricao" name="descricao" [(ngModel)]="descricao" required placeholder="Descreva a tarefa" class="input-text">
-          <input type="datetime-local" id="dataHora" name="dataHora" [(ngModel)]="dataHora" required class="input-date">
-    
-          <button type="button" (click)="toggleImportante()" class="icon-button">
-            <i [class.fa-regular]="!importante" [class.fa-solid]="importante" class="fa-star"></i>
-          </button>
-    
-          <button type="submit" class="icon-button">
-            <i class="fas fa-paper-plane"></i>
-          </button>
+      <div class="listagem">
+        <router-outlet></router-outlet>
+      </div>
+  
+      
+        <div class="incluir">
+          <form (submit)="onSubmit($event)" class="formulario">
+            <div class="inputTarefa">
+              <input type="text" id="descricao" name="descricao" class="inputDescricao" [(ngModel)]="descricao" required placeholder="Descreva a tarefa" >
+              <input type="datetime-local" id="dataHora" name="dataHora" class="inputData" [(ngModel)]="dataHora" required >
+              <div class="inputPrioridade"  (click)="toggleImportante()">
+                <i [class.fa-regular]="!importante" [class.fa-solid]="importante" class="fa-star"></i>
+              </div>
+              <div class="submitTarefa" onclick="insertTarefa()"> <!--Criar o insertTarefa() -->
+                <i class="fas fa-paper-plane"></i>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </main>
+
+      </main>
+      
+    
 
     
   </div>
