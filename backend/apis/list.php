@@ -10,12 +10,12 @@ $listType = isset($_GET['type']) ? $_GET['type'] : 'minha-lista';
 $user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
 
 // Verificação básica do ID do usuário
-/*if ($user_id <= 0) {
+if ($user_id <= 0) {
     header('Content-Type: application/json');
     echo json_encode(['error' => 'ID do usuário inválido ou não fornecido.']);
     exit;
-}*/
-$user_id = '1'; // usuario mockado
+}
+// $user_id = '1'; // usuario mockado
 
 // Obtendo a data atual
 $currentDate = date('Y-m-d');

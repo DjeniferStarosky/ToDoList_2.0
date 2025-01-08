@@ -11,7 +11,8 @@
         <div class="prioridade"> 
             <i [class.fa-regular]="task.important === 0"
                 [class.fa-solid]="task.important === 1 "
-                class="fa-star"> </i>
+                class="fa-star"
+                (click)="toggleImportant(task)"> </i>
         </div>
     </div>
 </div>

@@ -6,11 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TasksService {
-  private apiUrl = 'http://localhost/todolist/backend/apis/list.php'; 
+  private baseApiUrl = 'http://localhost/todolist/backend/apis';
 
   constructor(private http: HttpClient) {}
 
+  // Método para listar tarefas
   getTasks(listType: string, userId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}?type=${listType}&user_id=${userId}`);
+    console.log('Enviando user_id:', userId);
+    return this.http.get(`${this.baseApiUrl}/list.php?type=${listType}&user_id=${userId}`);
+  }
+
+  // Método para atualizar tarefa
+  updateTask(id: number, important: number, status: string): Observable<any> {
+    const url = `${this.baseApiUrl}/update.php`;
+    const body = { id, important, status };
+    return this.http.put(url, body);
   }
 }

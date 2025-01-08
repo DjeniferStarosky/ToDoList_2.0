@@ -17,13 +17,25 @@ export class LoginComponent {
 
   login() {
     const { username, password } = this.loginData;
-
+  
     this.authService.login(username, password).subscribe(
       response => {
         if (response && response.message === 'Login bem-sucedido.') {
-          // Se o login for bem-sucedido, armazene informações relevantes
+          // Supondo que a resposta inclua os dados do usuário (id, username, token)
+          const user = {
+            id: response.user_id,          // id do usuário retornado pela API
+            username: response.username,   // username do usuário
+            token: response.token          // token do usuário
+          };
+  
+          // Salve o objeto completo de usuário no localStorage
+          localStorage.setItem('user', JSON.stringify(user));
+  
+          // Se necessário, chame o método para atualizar o ID do usuário logado
           this.authService.setAuthentication(response.token);  // Salva o token gerado
           this.authService.setUser(response.username); // Salvar o nome do usuário
+  
+          // Redireciona para a página 'minha-lista'
           this.router.navigate(['/minha-lista']);
         } else {
           this.message = response.message || 'Erro desconhecido. Tente novamente em instantes.';
@@ -37,6 +49,8 @@ export class LoginComponent {
       }
     );
   }
+  
+
 
 
   register() {
