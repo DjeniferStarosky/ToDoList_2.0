@@ -30,8 +30,8 @@ export class MinhaListaComponent implements OnInit {
     this.tasksService.getTasks('minha-lista', this.loggedUserId).subscribe({
       next: (data: any) => {
         this.tasks = data;
-        console.log('Tarefas recebidas:', this.tasks);
-      },
+        console.log('Tarefas recebidas:', this.tasks);//REMOVER ESSA LINHA
+      }, 
       error: err => console.error('Erro ao carregar tarefas:', err)
     });
   }
@@ -42,7 +42,7 @@ export class MinhaListaComponent implements OnInit {
     const updatedImportant = task.important === 1 ? 0 : 1; 
     this.tasksService.updateTask(task.id, updatedImportant, task.status).subscribe({
       next: response => {
-        console.log(`Tarefa ${task.id} atualizada com sucesso:`, response);
+        console.log(`Tarefa ${task.id} atualizada com sucesso:`, response); //REMOVER ESSA LINHA
         task.important = updatedImportant; // Atualiza localmente para refletir na UI
       },
       error: err => console.error('Erro ao atualizar tarefa:', err)
