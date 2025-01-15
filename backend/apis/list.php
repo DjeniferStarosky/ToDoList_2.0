@@ -2,7 +2,6 @@
 require_once('../config/headers.php');
 require_once('../db/connection.php');
 
-
 // Obtendo o tipo de listagem da consulta (default: 'minha-lista')
 $listType = isset($_GET['type']) ? $_GET['type'] : 'minha-lista';
 
@@ -15,10 +14,13 @@ if ($user_id <= 0) {
     echo json_encode(['error' => 'ID do usuário inválido ou não fornecido.']);
     exit;
 }
-// $user_id = '1'; // usuario mockado
+
 
 // Obtendo a data atual
+$timezone = isset($_GET['timezone']) ? $_GET['timezone'] : 'America/Sao_Paulo';
+date_default_timezone_set($timezone);
 $currentDate = date('Y-m-d');
+
 
 // SQL base para listar tarefas
 $sql = "SELECT * FROM tasks WHERE status = 'pendente' AND user_id = :user_id";

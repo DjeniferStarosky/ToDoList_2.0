@@ -12,8 +12,9 @@ export class TasksService {
 
   // Método para listar tarefas
   getTasks(listType: string, userId: number): Observable<any> {
-    console.log('Enviando user_id:', userId);
-    return this.http.get(`${this.baseApiUrl}/list.php?type=${listType}&user_id=${userId}`);
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    console.log('Enviando user_id:', userId, 'Fuso horario:', timezone);
+    return this.http.get(`${this.baseApiUrl}/list.php?type=${listType}&user_id=${userId}&timezone=${timezone}`);
   }
 
   // Método para atualizar tarefa
