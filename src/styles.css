@@ -158,7 +158,13 @@ html, body {
 }
 
 .data {
-    color: rgba(0, 0, 255, 0.589);
+    color: rgb(0, 0, 255);
+    font-size: 13px;
+    margin: 0 5px 0 5px ;
+}
+
+.data_atrasada {
+  color: rgb(255, 0, 0);
     font-size: 13px;
     margin: 0 5px 0 5px ;
 }

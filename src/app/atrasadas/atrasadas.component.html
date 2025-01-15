@@ -1,1 +1,18 @@
-<p>atrasadas works!</p>
+<div class="listagem">
+    <h2 class="tituloPag"><i class="fa-solid fa-circle-exclamation"></i> Tarefas atrasadas</h2>
+    <p *ngIf="tasks.length === 0" class="semTarefa">Você não possui tarefas cadastradas</p>
+
+    <div *ngFor="let task of tasks" class="item_lista">
+        <div class="concluir" (click)="concluirTarefa(task)"><i class="fas fa-check"></i></div>
+        <div class="informacao">
+            <p class="descricao">{{ task.description }}</p>
+            <p class="data_atrasada">{{ formatDate(task.date_time) }}</p>
+        </div>
+        <div class="prioridade"> 
+            <i [class.fa-regular]="task.important === 0"
+                [class.fa-solid]="task.important === 1 "
+                class="fa-star"
+                (click)="toggleImportant(task)"> </i>
+        </div>
+    </div>
+</div>
