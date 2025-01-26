@@ -23,4 +23,14 @@ export class TasksService {
     const body = { id, important, status };
     return this.http.put(url, body);
   }
+
+  // Método para criar uma nova tarefa
+  createTask(task: any): Observable<any> {
+    const url = `${this.baseApiUrl}/create.php`;
+    return this.http.post(url, task, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+
 }

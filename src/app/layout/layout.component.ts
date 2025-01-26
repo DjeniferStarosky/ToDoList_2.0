@@ -1,64 +1,81 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TemaService } from '../tema.service'; 
-import { AuthService } from '../auth.service'; 
-
-
+import { TemaService } from '../tema.service';
+import { AuthService } from '../auth.service';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css']
 })
-export class LayoutComponent {
+export class LayoutComponent implements OnInit {
   descricao: string = '';
-  dataHora: string = ''; 
+  dataHora: string = '';
   importante: boolean = false;
   userName: string | null = null;
 
   constructor(
-    private temaService: TemaService, 
-    private router: Router, 
-    private authService: AuthService 
+    private temaService: TemaService,
+    private router: Router,
+    private authService: AuthService,
+    private tasksService: TasksService
   ) {}
 
-  // Método para alternar a marcação de importante
+  ngOnInit(): void {
+    const temaAtual = this.temaService.getTema();
+    document.body.classList.add(temaAtual);
+    this.userName = this.authService.getUser();
+  }
+
   toggleImportante(): void {
     this.importante = !this.importante;
   }
 
-  // Método para enviar o formulário
-  onSubmit(event: Event): void {
-    event.preventDefault();  // Evita o comportamento padrão do formulário (recarregar a página)
-    console.log('Tarefa:', this.descricao);
-    console.log('Data e Hora:', this.dataHora);
-    console.log('Importante:', this.importante);
-    // >>>>>adicionar a lógica para salvar os dados no banco<<<<
+  // Adicionar tarefa ao banco de dados
+  insertTarefa(): void {
+    const userId = this.authService.getUserId();
+    if (!userId) {
+      alert('Erro: Usuário não autenticado.');
+      return;
+    }
+
+    if (!this.descricao || !this.dataHora) {
+      alert('Preencha todos os campos antes de adicionar a tarefa.');
+      return;
+    }
+
+    const novaTarefa = {
+      user_id: userId,
+      description: this.descricao,
+      date_time: this.dataHora,
+      important: this.importante ? 1 : 0
+    };
+
+    this.tasksService.createTask(novaTarefa).subscribe({
+      next: (res) => {
+        alert('Tarefa criada com sucesso!');
+        this.descricao = '';
+        this.dataHora = '';
+        this.importante = false;
+      },
+      error: (err) => {
+        console.error(err);
+        alert('Erro ao criar tarefa.');
+      }
+    });
   }
 
-
-  ngOnInit(): void {
-    // Garantir que o tema esteja aplicado
-    const temaAtual = this.temaService.getTema();
-    document.body.classList.add(temaAtual);
-
-    // Recuperar o nome do usuário logado
-    this.userName = this.authService.getUser();
-  }
-
-  // Método para navegar para outras rotas
   navegarPara(rota: string): void {
     this.router.navigate([rota]);
   }
 
-  // Verifica se a rota está ativa
   rotaAtiva(rota: string): boolean {
     return this.router.url.startsWith(rota);
   }
 
- 
   getAvatar(): string {
-    const temaAtual = this.temaService.getTema(); 
+    const temaAtual = this.temaService.getTema();
     switch (temaAtual) {
       case 'dark':
         return 'avatar2.png';
@@ -74,5 +91,4 @@ export class LayoutComponent {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-
 }
