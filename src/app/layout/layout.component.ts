@@ -33,38 +33,40 @@ export class LayoutComponent implements OnInit {
   }
 
   // Adicionar tarefa ao banco de dados
-  insertTarefa(): void {
-    const userId = this.authService.getUserId();
-    if (!userId) {
-      alert('Erro: Usuário não autenticado.');
-      return;
-    }
-
-    if (!this.descricao || !this.dataHora) {
-      alert('Preencha todos os campos antes de adicionar a tarefa.');
-      return;
-    }
-
-    const novaTarefa = {
-      user_id: userId,
-      description: this.descricao,
-      date_time: this.dataHora,
-      important: this.importante ? 1 : 0
-    };
-
-    this.tasksService.createTask(novaTarefa).subscribe({
-      next: (res) => {
-        alert('Tarefa criada com sucesso!');
-        this.descricao = '';
-        this.dataHora = '';
-        this.importante = false;
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Erro ao criar tarefa.');
-      }
-    });
+insertTarefa(): void {
+  const userId = this.authService.getUserId();
+  if (!userId) {
+    alert('Erro: Usuário não autenticado.');
+    return;
   }
+
+  if (!this.descricao || !this.dataHora) {
+    alert('Preencha todos os campos antes de adicionar a tarefa.');
+    return;
+  }
+
+  const novaTarefa = {
+    user_id: userId,
+    description: this.descricao,
+    date_time: this.dataHora,
+    important: this.importante ? 1 : 0
+  };
+
+  this.tasksService.createTask(novaTarefa).subscribe({
+    next: (res) => {
+      window.location.reload(); 
+
+      // Resetar os campos do formulário
+      this.descricao = '';
+      this.dataHora = '';
+      this.importante = false;
+    },
+    error: (err) => {
+      console.error(err);
+      alert('Erro ao criar tarefa.');
+    }
+  });
+}
 
   navegarPara(rota: string): void {
     this.router.navigate([rota]);
