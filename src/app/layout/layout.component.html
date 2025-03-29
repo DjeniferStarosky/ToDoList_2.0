@@ -4,14 +4,14 @@
       <div class="user-profile">
         <img [src]="getAvatar()" alt="Avatar do Usuário" class="avatar">
         <div class="user-info">
-          <p class="user-name">{{ userName || 'Nome do usuário' }}</p>
+          <p class="user-name">Olá, {{ userName || 'Nome do usuário' }}!</p>
           <button class="logout-button" (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
         </div>
       </div>
       
       <ul>
         <li>
-          <button class="menu" (click)="navegarPara('/minha-lista')" [ngClass]="{'active': rotaAtiva('/minha-lista')}"><i class="fas fa-list"></i> Minha Lista</button>
+          <button class="menu" (click)="navegarPara('/minha-lista')" [ngClass]="{'active': rotaAtiva('/minha-lista')}"><i class="fas fa-list"></i> Minhas Tarefas</button>
         </li>
         <li>
           <button class="menu" (click)="navegarPara('/meu-dia')" [ngClass]="{'active': rotaAtiva('/meu-dia')}"><i class="fas fa-calendar-day"></i>  Meu Dia</button>
